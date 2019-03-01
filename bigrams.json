@@ -1,0 +1,301 @@
+[{
+  "value": ["return", "git"],
+  "frequency": 101
+}, {
+  "value": ["p", "left-shift"],
+  "frequency": 105
+}, {
+  "value": ["left-shift", "p"],
+  "frequency": 107
+}, {
+  "value": ["left-cmd", "left"],
+  "frequency": 110
+}, {
+  "value": ["left-shift", "/"],
+  "frequency": 111
+}, {
+  "value": ["left", "del"],
+  "frequency": 112
+}, {
+  "value": ["/", "left-shift"],
+  "frequency": 114
+}, {
+  "value": [".", "left-shift"],
+  "frequency": 116
+}, {
+  "value": ["x", "left-cmd"],
+  "frequency": 118
+}, {
+  "value": ["left-cmd", "x"],
+  "frequency": 120
+}, {
+  "value": ["b", "left-cmd"],
+  "frequency": 123
+}, {
+  "value": ["left", "right"],
+  "frequency": 124
+}, {
+  "value": ["left-cmd", "b"],
+  "frequency": 124
+}, {
+  "value": ["a", "del"],
+  "frequency": 126
+}, {
+  "value": ["right", "left"],
+  "frequency": 128
+}, {
+  "value": ["left-shift", "0"],
+  "frequency": 129
+}, {
+  "value": ["0", "left-shift"],
+  "frequency": 129
+}, {
+  "value": ["del", "left"],
+  "frequency": 130
+}, {
+  "value": ["m", "left-shift"],
+  "frequency": 131
+}, {
+  "value": ["left-shift", "m"],
+  "frequency": 135
+}, {
+  "value": ["del", "right"],
+  "frequency": 146
+}, {
+  "value": ["9", "left-shift"],
+  "frequency": 147
+}, {
+  "value": ["left-shift", "9"],
+  "frequency": 149
+}, {
+  "value": ["s", "left-shift"],
+  "frequency": 151
+}, {
+  "value": ["del", "-"],
+  "frequency": 160
+}, {
+  "value": ["c", "left-shift"],
+  "frequency": 161
+}, {
+  "value": ["left-shift", "c"],
+  "frequency": 162
+}, {
+  "value": [".", "del"],
+  "frequency": 163
+}, {
+  "value": ["left-shift", "right"],
+  "frequency": 164
+}, {
+  "value": ["left-shift", "a"],
+  "frequency": 165
+}, {
+  "value": ["left-shift", "s"],
+  "frequency": 166
+}, {
+  "value": ["left-shift", "return"],
+  "frequency": 169
+}, {
+  "value": ["left-option", "del"],
+  "frequency": 170
+}, {
+  "value": ["left-cmd", "s"],
+  "frequency": 173
+}, {
+  "value": ["left-shift", "'"],
+  "frequency": 173
+}, {
+  "value": ["down", "up"],
+  "frequency": 174
+}, {
+  "value": ["right", "del"],
+  "frequency": 175
+}, {
+  "value": ["'", "left-shift"],
+  "frequency": 177
+}, {
+  "value": ["left-shift", "tab"],
+  "frequency": 177
+}, {
+  "value": ["up", "down"],
+  "frequency": 177
+}, {
+  "value": [";", "left-shift"],
+  "frequency": 178
+}, {
+  "value": ["right", "left-shift"],
+  "frequency": 180
+}, {
+  "value": ["s", "left-cmd"],
+  "frequency": 180
+}, {
+  "value": ["left-shift", ";"],
+  "frequency": 182
+}, {
+  "value": ["a", "left-shift"],
+  "frequency": 184
+}, {
+  "value": ["left-option", "left-option"],
+  "frequency": 187
+}, {
+  "value": ["return", "del"],
+  "frequency": 196
+}, {
+  "value": ["right", "return"],
+  "frequency": 208
+}, {
+  "value": ["t", "left-shift"],
+  "frequency": 222
+}, {
+  "value": ["left-shift", "t"],
+  "frequency": 237
+}, {
+  "value": ["z", "left-cmd"],
+  "frequency": 247
+}, {
+  "value": ["del", ","],
+  "frequency": 248
+}, {
+  "value": ["left-cmd", "z"],
+  "frequency": 248
+}, {
+  "value": ["right-shift", "right-shift"],
+  "frequency": 254
+}, {
+  "value": ["del", "."],
+  "frequency": 271
+}, {
+  "value": ["i", "left-shift"],
+  "frequency": 281
+}, {
+  "value": ["left-shift", "i"],
+  "frequency": 299
+}, {
+  "value": ["del", "left-option"],
+  "frequency": 314
+}, {
+  "value": ["right", "left-option"],
+  "frequency": 323
+}, {
+  "value": ["left-option", "right"],
+  "frequency": 324
+}, {
+  "value": ["tab", "left-shift"],
+  "frequency": 336
+}, {
+  "value": ["left-cmd", "`"],
+  "frequency": 358
+}, {
+  "value": ["`", "left-cmd"],
+  "frequency": 360
+}, {
+  "value": ["left-cmd", "t"],
+  "frequency": 377
+}, {
+  "value": ["t", "left-cmd"],
+  "frequency": 384
+}, {
+  "value": ["left-option", "left"],
+  "frequency": 420
+}, {
+  "value": ["return", "left-shift"],
+  "frequency": 451
+}, {
+  "value": ["left-cmd", "del"],
+  "frequency": 455
+}, {
+  "value": ["left", "left-option"],
+  "frequency": 458
+}, {
+  "value": ["left-cmd", "return"],
+  "frequency": 484
+}, {
+  "value": ["left-shift", "left"],
+  "frequency": 516
+}, {
+  "value": ["return", "return"],
+  "frequency": 522
+}, {
+  "value": ["left", "left-shift"],
+  "frequency": 523
+}, {
+  "value": ["w", "left-cmd"],
+  "frequency": 543
+}, {
+  "value": ["left-cmd", "w"],
+  "frequency": 544
+}, {
+  "value": ["left-shift", "left-cmd"],
+  "frequency": 544
+}, {
+  "value": ["left-cmd", "left-shift"],
+  "frequency": 553
+}, {
+  "value": ["c", "left-cmd"],
+  "frequency": 686
+}, {
+  "value": ["left-cmd", "c"],
+  "frequency": 690
+}, {
+  "value": ["left-cmd", "v"],
+  "frequency": 727
+}, {
+  "value": ["v", "left-cmd"],
+  "frequency": 728
+}, {
+  "value": ["left-shift", "del"],
+  "frequency": 731
+}, {
+  "value": ["del", "left-cmd"],
+  "frequency": 745
+}, {
+  "value": ["del", "return"],
+  "frequency": 792
+}, {
+  "value": ["left-shift", "left-option"],
+  "frequency": 971
+}, {
+  "value": ["left-option", "left-shift"],
+  "frequency": 1082
+}, {
+  "value": ["down", "down"],
+  "frequency": 1091
+}, {
+  "value": ["del", "left-shift"],
+  "frequency": 1120
+}, {
+  "value": ["a", "left-cmd"],
+  "frequency": 1189
+}, {
+  "value": ["return", "left-cmd"],
+  "frequency": 1199
+}, {
+  "value": ["tab", "tab"],
+  "frequency": 1371
+}, {
+  "value": ["left-cmd", "a"],
+  "frequency": 1416
+}, {
+  "value": ["left-shift", "left-shift"],
+  "frequency": 1526
+}, {
+  "value": ["right", "right"],
+  "frequency": 2093
+}, {
+  "value": ["left", "left"],
+  "frequency": 2858
+}, {
+  "value": ["tab", "left-cmd"],
+  "frequency": 3737
+}, {
+  "value": ["left-cmd", "tab"],
+  "frequency": 3821
+}, {
+  "value": ["del", "del"],
+  "frequency": 6134
+}, {
+  "value": ["left-cmd", "left-cmd"],
+  "frequency": 6578
+}, {
+  "value": ["up", "up"],
+  "frequency": 8851
+}]
