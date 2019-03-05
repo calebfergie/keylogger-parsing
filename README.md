@@ -2,7 +2,7 @@
 
 **This is a repository for my work tracking and analyzing my own keystrokes.**
 
-[](public/images/bigram-400plus-answerminer.png)
+[](/public/images/bigram-400plus-answerminer.png) 
 
 ## Context
 
