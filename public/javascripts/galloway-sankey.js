@@ -20,18 +20,30 @@ var node = svg.append("g")
     .attr("font-size", 10)
   .selectAll("g");
   var graph;
-d3.json("./data/energy.json", function(error, energy) {
+
+
+d3.json("./data/bigrams.json", function(error, data) {
   if (error) throw error;
-  graph = sankey(energy);
+  graph = sankey(data);
+  // // https://stackoverflow.com/questions/14629853/json-representation-for-d3-force-directed-networks
+  // var nodeMap = {};
+  // graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
+  // graph.links = graph.links.map(function(x) {
+  //   return {
+  //     source: nodeMap[x.source],
+  //     target: nodeMap[x.target],
+  //     value: x.x
+  //   };
+  // });
   link = link
-    .data(energy.links)
+    .data(data.links)
     .enter().append("path")
       .attr("d", d3.sankeyLinkHorizontal())
       .attr("stroke-width", function(d) { return Math.max(1, d.width); });
   link.append("title")
       .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
   node = node
-    .data(energy.nodes)
+    .data(data.nodes)
     .enter().append("g")
   	.call(d3.drag()
             .subject(function(d){return d})

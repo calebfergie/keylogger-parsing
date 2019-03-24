@@ -11,6 +11,9 @@ const grams = {
   tri: {},
 };
 
+const nodes = [];
+const links = [];
+
 //variables for the buffer
 let characterIndex = -1;
 const characterLength = buffer.length;
@@ -64,22 +67,65 @@ const wordsByFrequency = Object.keys(inputs)
 
 const filteredBigrams = Object.keys(grams.bi)
     .map(input => grams.bi[input])
-    .sort((a, b) => a.frequency - b.frequency)
+    .sort((a, b) => b.frequency - a.frequency)
 
 const filteredTrigrams = Object.keys(grams.tri)
   .map(input => grams.tri[input])
-  .sort((a, b) => a.frequency - b.frequency)
+  .sort((a, b) => b.frequency - a.frequency)
+
+const firstWords = [];
+const secondWords = [];
+
+for (var bg in filteredBigrams) {
+  // console.log(filteredBigrams[bg]);
+
+  let source = filteredBigrams[bg].value[0];
+  if(!firstWords[source]) {
+    firstWords[source] = {"name": source};
+    nodes.push({
+      "name": source,
+      "type": "source"
+    });
+  }
+
+  let target = filteredBigrams[bg].value[1];
+  if(!secondWords[target]) {
+    secondWords[target] = {"name": target};
+    nodes.push({
+      "name": target,
+      "type": "target"
+    });
+  }
+  let sourcePos = findPos(filteredBigrams[bg].value[0],nodes,"source");
+  let targetPos = findPos(filteredBigrams[bg].value[1],nodes,"target");
+  let value = filteredBigrams[bg].frequency;
+  links.push({
+    "source": sourcePos,
+    "target": targetPos,
+    "value": value
+  });
+  // console.log("source: " + source + " target: " + target + " value: " + value);
+  //add each command / word as a node
+}
+
+// console.log(nodes);
+// console.log(links);
+const graph = {
+  "nodes": nodes,
+  "links": links
+}
 
 
-// console.log(JSON.stringify(filteredTrigrams));
+// console.log(JSON.stringify(graph));
 // write to a new file
-fs.writeFile('commands.json', JSON.stringify(commandsByFrequency), (err) => {
+fs.writeFile('./public/data/bigrams.json', JSON.stringify(graph), (err) => {
     // throws an error, you could also catch it here
     if (err) throw err;
-
     // success case, the file was saved
-    console.log('updated JSON');
+    console.log('updated bigrams JSON');
 });
+
+
 
 //FUNCTIONS
 
@@ -91,6 +137,7 @@ function addToInputs(value,type) {
       type: type,
       frequency: 1,
     };
+    // nodes.push({"name": value});
   } else { //otherwise, update its frequency
     inputs[value].frequency += 1;
   }
@@ -135,6 +182,18 @@ grams.tri = Object.keys(grams.tri).reduce((acc, tri) => {
   }
   return acc;
 }, {});
+}
+
+function findPos(keystroke,nodes,type) {
+  // from https://stackoverflow.com/questions/36419195/get-index-from-a-json-object-with-value/36419269
+  var index = -1;
+  var filteredObj = nodes.find(function(item, i){
+  if(item.name === keystroke && item.type === type){
+    index = i;
+  }
+});
+// console.log(keystroke +"'s position is: " + index);
+return index;
 }
 
 //not currently used/working

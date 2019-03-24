@@ -95,6 +95,8 @@
     "name": "Wave"
   }, {
     "name": "Wind"
+  }, {
+    "name": "Caleb"
   }],
   "links": [{
     "source": 0,
@@ -110,7 +112,7 @@
     "value": 26.862
   }, {
     "source": 1,
-    "ta get": 4,
+    "target": 4,
     "value": 280.322
   }, {
     "source": 1,
