@@ -1,8 +1,9 @@
 //written by Rafe Lepre (https://www.github.com/HyphnKnight) updated by caleb
-//reads a caleb.src file and spits out JSONs as defined in fs.write command
+//reads a keystroke.log file and spits out JSON data about the log file
+//also creates a JSON that can be used to make sankey diagrams (graph)
 
 const fs = require('fs');
-const buffer = fs.readFileSync('./public/data/log.src', 'utf8');
+const buffer = fs.readFileSync('./public/data/keystroke.log', 'utf8');
 
 //JSONs for output data
 const inputs = {};
@@ -11,6 +12,7 @@ const grams = {
   tri: {},
 };
 
+//variables to create d3 JSON file
 const nodes = [];
 const links = [];
 
@@ -51,19 +53,19 @@ while (++characterIndex < characterLength) {
 
 }
 
-var freqFilter = 100; //minimum number of occurences to be included in the output
+var freqFilter = 250; //minimum number of occurences to be included in the output
 filterGrams(grams,freqFilter); //filter out ngrams that have less than freqFilter occurances
 
 //create variables for each of the json files I want
 const commandsByFrequency =  Object.keys(inputs)
     .map(input => inputs[input])
     .filter(({type}) => type === 'command')
-    .sort((a, b) => a.frequency - b.frequency)
+    .sort((a, b) => b.frequency - a.frequency)
 
 const wordsByFrequency = Object.keys(inputs)
   .map(input => inputs[input])
-  .filter(({type}) => type === 'word')
-  .sort((a, b) => a.frequency - b.frequency)
+  .filter(({type}) => type === 'character')
+  .sort((a, b) => b.frequency - a.frequency)
 
 const filteredBigrams = Object.keys(grams.bi)
     .map(input => grams.bi[input])
@@ -73,13 +75,51 @@ const filteredTrigrams = Object.keys(grams.tri)
   .map(input => grams.tri[input])
   .sort((a, b) => b.frequency - a.frequency)
 
+  // write the jsons to files
+  fs.writeFile('./public/data/commands.json', JSON.stringify(commandsByFrequency), (err) => {
+      // throws an error, you could also catch it here
+      if (err) throw err;
+      // success case, the file was saved
+      console.log('updated commands JSON');
+  });
+
+  fs.writeFile('./public/data/words.json', JSON.stringify(wordsByFrequency), (err) => {
+      // throws an error, you could also catch it here
+      if (err) throw err;
+      // success case, the file was saved
+      console.log('updated words JSON');
+  });
+
+  fs.writeFile('./public/data/bigrams.json', JSON.stringify(filteredBigrams), (err) => {
+      // throws an error, you could also catch it here
+      if (err) throw err;
+      // success case, the file was saved
+      console.log('updated bigrams JSON');
+  });
+
+  fs.writeFile('./public/data/trigrams.json', JSON.stringify(filteredTrigrams), (err) => {
+      // throws an error, you could also catch it here
+      if (err) throw err;
+      // success case, the file was saved
+      console.log('updated trigrams JSON');
+  });
+
+// CODE TO GENERATE A JSON D3.SANKEY LIKES
+
+//holding cells for unique "source" and "target" values
 const firstWords = [];
 const secondWords = [];
 
+//go through each bigram
 for (var bg in filteredBigrams) {
-  // console.log(filteredBigrams[bg]);
 
+  // create nodes portion of d3 array
+  // create source nodes aka first parts of bigram
   let source = filteredBigrams[bg].value[0];
+  //ANNOYING WORKAROUND FOR WORDS THAT ARE ALSO ARRAY METHODS - NOT BEING PICKED UP OTHERWISE
+  if (source.match(/^(push|find|keys|some|map|shift|every|pop|unshift)$/)) {
+    source = source + "_"
+}
   if(!firstWords[source]) {
     firstWords[source] = {"name": source};
     nodes.push({
@@ -88,7 +128,12 @@ for (var bg in filteredBigrams) {
     });
   }
 
+  // create target nodes aka second parts of bigram
   let target = filteredBigrams[bg].value[1];
+  //ANNOYING WORKAROUND FOR WORDS THAT ARE ALSO ARRAY METHODS - NOT BEING PICKED UP OTHERWISE
+  if (target.match(/^(push|find|keys|some|map|shift|every|pop|unshift)$/)) {
+    target = target + "_"
+}
   if(!secondWords[target]) {
     secondWords[target] = {"name": target};
     nodes.push({
@@ -96,33 +141,30 @@ for (var bg in filteredBigrams) {
       "type": "target"
     });
   }
-  let sourcePos = findPos(filteredBigrams[bg].value[0],nodes,"source");
-  let targetPos = findPos(filteredBigrams[bg].value[1],nodes,"target");
+
+  // find positions of source and target values to create links array for d3
+  let sourcePos = findPos(source,nodes,"source");
+  let targetPos = findPos(target,nodes,"target");
   let value = filteredBigrams[bg].frequency;
   links.push({
     "source": sourcePos,
     "target": targetPos,
     "value": value
   });
-  // console.log("source: " + source + " target: " + target + " value: " + value);
-  //add each command / word as a node
 }
 
-// console.log(nodes);
-// console.log(links);
+// combine the two arrays into the JSON object d3 is expecting
 const graph = {
   "nodes": nodes,
   "links": links
 }
 
-
-// console.log(JSON.stringify(graph));
-// write to a new file
-fs.writeFile('./public/data/bigrams.json', JSON.stringify(graph), (err) => {
+// write the json to a file
+fs.writeFile('./public/data/bigrams-sankey.json', JSON.stringify(graph), (err) => {
     // throws an error, you could also catch it here
     if (err) throw err;
     // success case, the file was saved
-    console.log('updated bigrams JSON');
+    console.log('updated bigrams-sankey JSON');
 });
 
 
@@ -137,7 +179,6 @@ function addToInputs(value,type) {
       type: type,
       frequency: 1,
     };
-    // nodes.push({"name": value});
   } else { //otherwise, update its frequency
     inputs[value].frequency += 1;
   }
@@ -185,7 +226,7 @@ grams.tri = Object.keys(grams.tri).reduce((acc, tri) => {
 }
 
 function findPos(keystroke,nodes,type) {
-  // from https://stackoverflow.com/questions/36419195/get-index-from-a-json-object-with-value/36419269
+  // adapted from https://stackoverflow.com/questions/36419195/get-index-from-a-json-object-with-value/36419269
   var index = -1;
   var filteredObj = nodes.find(function(item, i){
   if(item.name === keystroke && item.type === type){
@@ -193,12 +234,18 @@ function findPos(keystroke,nodes,type) {
   }
 });
 // console.log(keystroke +"'s position is: " + index);
+//quick error handling
+if (index == -1) {
+  console.log("could not find " + keystroke +  " of type " +type+" in the nodes array - this will create an error in the sankey diagram");
+}
 return index;
 }
 
-//not currently used/working
+//not currently used. Not working, recieve error: TypeError [ERR_INVALID_ARG_TYPE]: The "fd" argument must be of type number. Received type string
 function writeJSON (filename,contents) {
-  fs.write(filename+'.json', JSON.stringify(contents), (err) => {
+  var filepath = './public/data/'+filename+'.json'
+  console.log(filepath);
+  fs.write(filepath, JSON.stringify(contents), (err) => {
       // throws an error, you could also catch it here
       if (err) throw err;
       // success case, the file was saved

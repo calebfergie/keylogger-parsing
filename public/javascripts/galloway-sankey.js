@@ -1,3 +1,5 @@
+// Copied outright from https://bl.ocks.org/gallowayevan/88d7c27ac2d1cfb78541d96b7477b43c
+
 var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
@@ -22,19 +24,9 @@ var node = svg.append("g")
   var graph;
 
 
-d3.json("./data/bigrams.json", function(error, data) {
+d3.json("./data/bigrams-sankey.json", function(error, data) {
   if (error) throw error;
   graph = sankey(data);
-  // // https://stackoverflow.com/questions/14629853/json-representation-for-d3-force-directed-networks
-  // var nodeMap = {};
-  // graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
-  // graph.links = graph.links.map(function(x) {
-  //   return {
-  //     source: nodeMap[x.source],
-  //     target: nodeMap[x.target],
-  //     value: x.x
-  //   };
-  // });
   link = link
     .data(data.links)
     .enter().append("path")
