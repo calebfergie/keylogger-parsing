@@ -90,17 +90,17 @@ The JSON files mentioned above are formatted as in the examples below:
 
  This tool is written with [node.js](https://nodejs.org/en/) with the code to process `keystroke.log` is stored in the [log-parser.js](public/data/log-parser.js) in the repository.
 
- The [bigrams.json](public/data/bigrams.json) and bigrams.json](public/data/bigrams.json) files don't include all bi-grams and tri-grams. They are limited to results that appear with a certain frequency (or more). You can change this frequency by changing the value of `freqFilter` in the file [log-parser.js](public/data/log-parser.js) file, set to 250 in the example below:
+ The [bigrams.json](public/data/bigrams.json) and [trigrams.json](public/data/trigrams.json) files **don't include all** bi-grams and tri-grams. They are limited to results that appear with a certain frequency (or more). You can change this frequency by changing the value of `freqFilter` in the file [log-parser.js](public/data/log-parser.js) file, set to 250 in the example below:
 
  `var freqFilter = 250; //minimum number of occurrences to be included in the output`
 
  The `app.js` file runs the `log-parser.js` file and then serves the D3 visualization through an express server.
 
- The code for the D3 tool is adapted from [Evan Galloway's D3 Sankey Diagram](https://bl.ocks.org/gallowayevan/88d7c27ac2d1cfb78541d96b7477b43c), stored in the file [galloway-sankey.json](public/databigrams.json)
+ The code for the D3 tool is adapted from [Evan Galloway's D3 Sankey Diagram](https://bl.ocks.org/gallowayevan/88d7c27ac2d1cfb78541d96b7477b43c), stored in the file [galloway-sankey.js](public/javascripts/galloway-sankey.js).
 
 ## **Context**
 
-This tool was made in order to perform analysis on my own keystroke data. Use at your own risk!
+This tool was made in order to perform analysis on my own keystroke data. *Use at your own risk!* ⚠️ 
 
 It was done in an effort to understand my conscious and subconscious decisions - as part of [NYU ITPs Rest of You](https://itp.nyu.edu/classes/roy19/) class.
 
