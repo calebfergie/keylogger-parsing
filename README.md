@@ -48,7 +48,7 @@ updated bigrams-sankey JSON
 finished running log parser
 ```
 
-..and the [data folder](public/data) should now have files (`commands.json`,`words.json`,`bigrams.json`,`trigrams.json`) updated with your data.
+...and the [data folder](public/data) should now have files (`commands.json`,`words.json`,`bigrams.json`,`trigrams.json`) updated with your data.
 
 If you navigate to `localhost:5000` in your browser, the sankey digram should appear. It is slightly interactive, try dragging the nodes up & down.
 
@@ -113,9 +113,11 @@ The JSON files mentioned above are formatted as in the examples below:
 
 #### 1. Presses and Releases Are both Recorded
 
-The Keylogger records both the press **and release of some commands** (e.g. [shift], [cmd], [ctrl]). [Here's a video demonstrating what I mean](https://www.youtube.com/watch?v=dX7qauIfNJkI). I put in a [feature request](https://github.com/GiacomoLaw/Keylogger/issues/75) for this on GitHub, so we'll see if any update occur, okurr?
+The Keylogger records both the press **and release of some commands** (e.g. [shift], [cmd], [ctrl]). For example, the keystroke combo `Command+Tab` would actually appear as ["left-cmd", "tab", "left-cmd"]. [Here's a video demonstrating what I mean](https://www.youtube.com/watch?v=dX7qauIfNJkI).
 
-Otherwise, `log-parser.js` file will need to be updated to handle this.
+This 'double-dipping' effect makes it harder to analyze this information, as there is a superfluous keystroke injected between other real ones.
+
+I put in a [feature request](https://github.com/GiacomoLaw/Keylogger/issues/75) for this on GitHub, so we'll see if any update occur. Otherwise, `log-parser.js` file will need to be updated to handle this.
 
 #### 2. Words that are also Array Methods
 
@@ -135,7 +137,7 @@ if (target.match(/^(push|find|keys|some|map|shift|every|pop|unshift)$/)) {
 }
 ```
 
-If you are recieving an error that reads: `could not find X of type Y in the nodes array - this will create an error in the sankey diagram`, add the word `X` to the list of words above.
+If you are receiving an error that reads: `could not find X of type Y in the nodes array - this will create an error in the sankey diagram`, add the word `X` to the list of words above.
 
 ## **Context**
 
