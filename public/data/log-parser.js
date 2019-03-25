@@ -242,7 +242,7 @@ return index;
 }
 
 //not currently used. Not working, recieve error: TypeError [ERR_INVALID_ARG_TYPE]: The "fd" argument must be of type number. Received type string
-function writeJSON (filename,contents) {
+function writeJSON(filename,contents) {
   var filepath = './public/data/'+filename+'.json'
   console.log(filepath);
   fs.write(filepath, JSON.stringify(contents), (err) => {
