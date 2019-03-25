@@ -11,9 +11,9 @@ This tool ingests the `keystroke.log` file of the Keylogger tool and makes two t
 
 2. Frequency of single **non-commands** (keystrokes & words) typed (e.g. `t`,`13`, `not`).
 
-3. Frequency of **bi-grams** (2 keystroke combinations - e.g. `h`+`i`, `[left-cmd]`+`[tab]`, `ma`+`[return]`).
+3. Frequency of **bi-grams** (2 keystroke combinations - e.g. `hi`+`there`, `[left-cmd]`+`[tab]`, `ma`+`[return]`).
 
-4. Frequency of **tri-grams** (3 keystroke combinations - e.g. `s`+`u`+`p`,`[left-cmd][left-shift]`+`v`, `[left-cmd]`+`[tab]`+`[tab]`).
+4. Frequency of **tri-grams** (3 keystroke combinations - e.g. `[left-cmd]`+`[left-shift]`+`v`, `[left-cmd]`+`[tab]`+`[tab]`, `i`+`love`+`you`).
 
 *^these 4 JSON files can be used for data analysis.*
 
@@ -59,13 +59,13 @@ The JSON files mentioned above are formatted as in the examples below:
 {"value":"can","type":"character","frequency":96},
 {"value":"do","type":"character","frequency":95}]
 ```
-3. Frequency of **bi-grams** (2 keystroke combinations - e.g. `h`+`i`, `[left-cmd]`+`[tab]`, `ma`+`[return]`):
+3. Frequency of **bi-grams** (2 keystroke combinations - e.g. `hi`+`there`, `[left-cmd]`+`[tab]`, `ma`+`[return]`):
 ```
 [{"value":["left-cmd","v"],"frequency":2496},
 {"value":["left-cmd","c"],"frequency":2388},
 {"value":["left-option","left-shift"],"frequency":2206}]
 ```
-4. Frequency of **tri-grams** (3 keystroke combinations - e.g. `s`+`u`+`p`,`[left-cmd][left-shift]`+`v`, `[left-cmd]`+`[tab]`+`[tab]`):
+4. Frequency of **tri-grams** (3 keystroke combinations - e.g. `[left-cmd]`+`[left-shift]`+`v`, `[left-cmd]`+`[tab]`+`[tab]`, `i`+`love`+`you`):
 ```
 [{"value":["return","return","return"],"frequency":718},
 {"value":["left","left-option","left-shift"],"frequency":713},
@@ -83,11 +83,12 @@ The JSON files mentioned above are formatted as in the examples below:
             {"source":14,"target":3,"value":527},
             {"source":14,"target":41,"value":526}
             ...]
+  }       
   ```
 
 #### Parsing the .log file:
 
- This tool is written with node.js with the code to process `keystroke.log` is stored in the [log-parser.js](public/data/log-parser.js) in the repository.
+ This tool is written with [node.js](https://nodejs.org/en/) with the code to process `keystroke.log` is stored in the [log-parser.js](public/data/log-parser.js) in the repository.
 
  The [bigrams.json](public/data/bigrams.json) and bigrams.json](public/data/bigrams.json) files don't include all bi-grams and tri-grams. They are limited to results that appear with a certain frequency (or more). You can change this frequency by changing the value of `freqFilter` in the file [log-parser.js](public/data/log-parser.js) file, set to 250 in the example below:
 
