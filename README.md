@@ -45,13 +45,14 @@ If you navigate to `localhost:5000` in your browser, the sankey digram should ap
 
 #### JSON File Details
 
-The JSON files mentioned above are come are formatted as in the examples below:
+The JSON files mentioned above are formatted as in the examples below:
 
 1. Frequency of single **commands** typed (e.g. `[return]`,`[left-cmd]`, `[del]`):
 ```
 [{"value":"left-cmd","type":"command","frequency":62706},
 {"value":"del","type":"command","frequency":33336},
-{"value":"left-shift","type":"command","frequency":27040}] ```
+{"value":"left-shift","type":"command","frequency":27040}]
+```
 2. Frequency of single **non-commands** (keystrokes & words) typed (e.g. `t`,`13`, `not`):
 ```
 [{"value":"if","type":"character","frequency":97}},
