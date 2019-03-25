@@ -23,7 +23,7 @@ This tool ingests the `keystroke.log` file of the Keylogger tool and makes two t
 
 #### B. A Sankey Diagram of Bi-grams:
 
-An interactive visualization of bi-grams made with [Evan Galloway's D3 Sankey Diagram](https://bl.ocks.org/gallowayevan/88d7c27ac2d1cfb78541d96b7477b43c).
+An interactive visualization of bi-grams made with [Evan Galloway's D3 Sankey Diagram](https://bl.ocks.org/gallowayevan/88d7c27ac2d1cfb78541d96b7477b43c). You can see my version of it [here](https://keylog-parser.herokuapp.com/).
 
 ## **Using This Tool - Quick & Dirty**
 
@@ -98,14 +98,41 @@ The JSON files mentioned above are formatted as in the examples below:
 
  The code for the D3 tool is adapted from [Evan Galloway's D3 Sankey Diagram](https://bl.ocks.org/gallowayevan/88d7c27ac2d1cfb78541d96b7477b43c), stored in the file [galloway-sankey.js](public/javascripts/galloway-sankey.js).
 
+## Known Issues
+
+#### 1. Presses and Releases Are both Recorded
+
+The Keylogger records both the press **and release of some commands** (e.g. [shift], [cmd], [ctrl]). [Here's a video demonstrating what I mean](https://www.youtube.com/watch?v=dX7qauIfNJkI). I put in a [feature request](https://github.com/GiacomoLaw/Keylogger/issues/75) for this on GitHub, so we'll see if any update occur, okurr?
+
+Otherwise, `log-parser.js` file will need to be updated to handle this.
+
+#### 2. Words that are also Array Methods
+
+Words that are also array methods (e.g. push, pop, shift) are not processed correctly for the D3 data viz by `log-parser.js`. For my personal data set, I added the following alterations to handle it for `source` and `target` nodes:
+
+```
+if (source.match(/^(push|find|keys|some|map|shift|every|pop|unshift)$/)) {
+  source = source + "_"
+}
+```
+
+and...
+
+```
+if (target.match(/^(push|find|keys|some|map|shift|every|pop|unshift)$/)) {
+  target = target + "_"
+}
+```
+
+If you are recieving an error that reads: `could not find X of type Y in the nodes array - this will create an error in the sankey diagram`, add the word `X` to the list of words above.
+
 ## **Context**
 
-This tool was made in order to perform analysis on my own keystroke data. *Use at your own risk!* ⚠️ 
+This tool was made in order to perform analysis on my own keystroke data. *Use at your own risk!* ⚠️
 
 It was done in an effort to understand my conscious and subconscious decisions - as part of [NYU ITPs Rest of You](https://itp.nyu.edu/classes/roy19/) class.
 
 - **Feb. 4**: Installed [this keylogger](https://github.com/GiacomoLaw/Keylogger) on my mac.
-- **Feb. 4 - 23**: Engaged in normal computer use
 - **Feb. 23**: Created first [log-parser.js](public/data/log-parser.js) file.
 - **March 23**: Added sankey data visualization & cleaned up tool
 
@@ -113,4 +140,4 @@ It was done in an effort to understand my conscious and subconscious decisions -
 
 I was mostly interested in what keystrokes I typed *in combination* - keyboard shortcuts (e.g. `ctrl+c`, `ctrl+v`, `ctrl+tab`) and repeated key presses (e.g. `tab+tab+tab`, `delete+delete+delete`).
 
-More analysis to come.
+You can read more about it [here](https://itp.nyu.edu/classes/roy19/keylogger-results/).
