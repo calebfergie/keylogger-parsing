@@ -39,12 +39,14 @@ An interactive visualization of bi-grams made with [Evan Galloway's D3 Sankey Di
 
 You should see the following in your terminal
 
-```updated words JSON
+```
+updated words JSON
 updated bigrams JSON
 updated commands JSON
 updated trigrams JSON
 updated bigrams-sankey JSON
-finished running log parser```
+finished running log parser
+```
 
 ..and the [data folder](public/data) should now have files (`commands.json`,`words.json`,`bigrams.json`,`trigrams.json`) updated with your data.
 
